@@ -26,7 +26,7 @@ const Header: React.FC<HeaderProps> = ({ userName, onLogout }) => {
         onClick={() => setIsDropdownOpen(prev => !prev)}
       >
         <span className="user-name">{userName}</span>
-        <div className="dropdown-icon">▼</div>
+        <img className="img-icon" src='/icons/drop_icon.png'></img>
 
         {isDropdownOpen && (
           <div className="dropdown-menu">
