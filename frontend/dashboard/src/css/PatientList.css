@@ -1,0 +1,252 @@
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f4f7fa;
+    color: #323C47;
+    margin: 0;
+    padding: 0;
+  }
+
+  .container {
+    max-width: 80%;
+    margin: 10rem auto;
+    padding: 2.5rem;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 14px;
+    width: 40%;
+    margin: auto;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+  }
+  
+  .input {
+    padding: 12px;
+    font-size: 16px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    transition: 0.3s;
+    background: #fafafa;
+  }
+  
+  .input:focus {
+    border-color: #4caf50;
+    background: #fff;
+    outline: none;
+    box-shadow: 0 0 6px rgba(76, 175, 80, 0.3);
+  }
+  
+  .button {
+    padding: 12px;
+    font-size: 16px;
+    margin: .5rem 1rem;
+    font-weight: 500;
+    background: linear-gradient(135deg, #007EF2, #0064c1);
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: 0.3s ease-in-out;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  
+  .button:hover {
+    background: linear-gradient(135deg, #007df2d6, #0064c1);
+    transform: scale(1.03);
+  }
+
+
+  .button-form{
+    width: 50%;
+    align-self: center;
+  }
+  
+  .button:disabled {
+    background: gray;
+    cursor: not-allowed;
+  }
+  
+  .agent-list {
+    margin-top: 20px;
+    list-style: none;
+    padding: 0;
+  }
+  
+  .agent-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px;
+    border-bottom: 2px solid #ececec;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: 0.3s ease;
+  }
+  
+  .agent-item:hover {
+    background: #f4f4f4;
+    transform: scale(1.02);
+  }
+  
+  .edit-button,
+  .delete-button {
+    padding: 10px 14px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s ease-in-out;
+  }
+  
+  .edit-button {
+    background: linear-gradient(135deg, #ff9800, #e67e22);
+    color: white;
+  }
+  
+  .edit-button:hover {
+    background: linear-gradient(135deg, #e68900, #d35400);
+    transform: scale(1.05);
+  }
+  
+  .delete-button {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    color: white;
+  }
+  
+  .delete-button:hover {
+    background: linear-gradient(135deg, #d32f2f, #b71c1c);
+    transform: scale(1.05);
+  }
+  
+  .agent-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+    margin: 1rem;
+  
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+  }
+  
+  .agent-table th,
+  .agent-table td {
+    padding: 14px;
+    text-align: left;
+  }
+  
+  .agent-table th {
+    background: #EAEAEA;
+    color: black;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  
+  .agent-table td {
+    border-bottom: 2px solid #f0f0f0;
+  }
+  
+  .agent-table tr:hover {
+    background: #f4f4f4;
+    transition: 0.3s;
+  }
+  
+  .search-bar {
+    margin: 10px 0px;
+    padding: 10px;
+    width: 90%;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    transition: 0.3s;
+    background: #fafafa;
+  }
+  
+  .search-bar:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 6px rgba(0, 123, 255, 0.3);
+    outline: none;
+  }
+  
+  .general-func{
+    display: flex;
+  }
+
+  .search-filter-container{
+    margin: 1rem;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .search-container{
+    margin-right: .8rem;
+  }
+
+button {
+  margin-top: 20px;
+}
+
+.link-icon {
+  width: '20px';
+  height: '20px';
+  cursor: 'pointer';
+  margin-top: 1.2rem;
+  margin-right: .3rem;
+  
+}
+
+.action-items{
+  display: 'flex';
+  gap: '12px';
+  align-items: center;
+}
+
+  
+  @media (max-width: 600px) {
+    .container {
+      max-width: 95%;
+      padding: 1rem;
+    }
+  
+    .form {
+      padding: 1.2rem;
+    }
+  
+    .button {
+      color: #007EF2;
+      padding: 14px;
+      font-size: 14px;
+    }
+  
+    .agent-item {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .button-group {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+    }
+  
+    .agent-table th,
+    .agent-table td {
+      padding: 10px;
+      font-size: 14px;
+    }
+  }
+  

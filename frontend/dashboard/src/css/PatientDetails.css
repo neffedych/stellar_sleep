@@ -1,0 +1,33 @@
+.patient-info{
+    
+    display: flex;
+    justify-content: flex-start;
+
+}
+
+.patient-info div{
+    margin-right: 10rem;
+    margin-bottom: 2rem;
+}
+
+.button {
+    padding: 10px;
+    font-size: 12px;
+    margin: .5rem 1rem;
+    font-weight: 500;
+    background: rgba(225, 146, 0, 0.853);
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: 0.3s ease-in-out;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  
+  .button:hover {
+    background: rgb(219, 142, 0);
+    transform: scale(1.03);
+  }
+
