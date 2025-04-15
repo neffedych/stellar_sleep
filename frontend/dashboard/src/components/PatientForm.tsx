@@ -145,7 +145,6 @@ const PatientForm: React.FC<PatientFormProps> = ({
       setStatus("Inquiry");
       setDateOfBirthError(false);
       setFirstAddress("");
-
       refreshPatientList();
       toggleFormVisibility();
     } catch (error) {

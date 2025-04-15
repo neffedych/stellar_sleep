@@ -75,6 +75,10 @@ const AgentList: React.FC = () => {
       .catch(err => console.error('Error deleting agent:', err));
   };
 
+  const handleCloseForm = () => {
+    setIsFormVisible(false);
+  };
+
   const getFilteredAgents = (): Agent[] => {
     return agents.filter(agent => {
       const matchesStatus =
@@ -127,23 +131,23 @@ const AgentList: React.FC = () => {
         </div>
 
         {isFormVisible && (
-          <PatientForm
-            firstName={firstName}
-            setFirstName={setFirstName}
-            lastName={lastName}
-            setLastName={setLastName}
-            dateOfBirth={dateOfBirth}
-            setDateOfBirth={setDateOfBirth}
-            status={status}
-            setStatus={setStatus}
-            dateOfBirthError={dateOfBirthError}
-            setDateOfBirthError={setDateOfBirthError}
-            editingAgentId={null}
-            providerId={"bd60654a-7217-4382-8f66-af08b5a3b477"}
-            toggleFormVisibility={toggleFormVisibility}
-            refreshPatientList={fetchPatients}
+                <PatientForm
+                firstName={firstName}
+                setFirstName={setFirstName}
+                lastName={lastName}
+                setLastName={setLastName}
+                dateOfBirth={dateOfBirth}
+                setDateOfBirth={setDateOfBirth}
+                status={status}
+                setStatus={setStatus}
+                dateOfBirthError={dateOfBirthError}
+                setDateOfBirthError={setDateOfBirthError}
+                editingAgentId={null}
+                providerId={"bd60654a-7217-4382-8f66-af08b5a3b477"}
+                toggleFormVisibility={toggleFormVisibility}
+                refreshPatientList={fetchPatients}
+              />
 
-          />
         )}
       </div>
 
