@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import PatientForm from './PatientForm';
 import Header from './Header';
 import '../css/PatientList.css';
@@ -26,112 +26,51 @@ const AgentList: React.FC = () => {
   const [dateOfBirth, setDateOfBirth] = useState('');
   const [status, setStatus] = useState<Agent['status']>('Active');
   const [dateOfBirthError, setDateOfBirthError] = useState(false);
-  const [editingId, setEditingId] = useState<string | null>(null);
-  const [editedData, setEditedData] = useState<Partial<Agent>>({});
-
-  
-
-
+  const navigate = useNavigate();
   const [agents, setAgents] = useState<Agent[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState<'Active' | 'Inactive' | 'All'>('All');
+  const [loggedUsername, setLoggedUsername] = useState('');
 
 
+  const fetchPatients = async () => {
+    try {
+      const res = await fetch('http://localhost:8000/api/patients/');
+      const data = await res.json();
+      
+      const transformedAgents: Agent[] = data.map((item: any) => ({
+        id: item.id,
+        firstName: item.first_name,
+        middleName: item.middle_name || '',
+        lastName: item.last_name,
+        dateOfBirth: item.date_of_birth,
+        status: item.status,
+        lastSeen: new Date(item.updated_at).toLocaleString(undefined, {
+          dateStyle: 'short',
+          timeStyle: 'short',
+        }),
+      }));
+      
+      setAgents(transformedAgents);
+    } catch (err) {
+      console.error('Failed to fetch agents:', err);
+    }
+  };
+
+  
   useEffect(() => {
-    fetch('http://localhost:8000/api/patients/')
-      .then(res => res.json())
-      .then((data) => {
-        const transformedAgents: Agent[] = data.map((item: any) => ({
-          id: item.id,
-          firstName: item.first_name,
-          middleName: item.middle_name || '',
-          lastName: item.last_name,
-          dateOfBirth: item.date_of_birth,
-          status: item.status,
-          lastSeen: new Date(item.updated_at).toLocaleString(undefined, {
-            dateStyle: 'short',
-            timeStyle: 'short',
-          }),
-        }));
-        
-        setAgents(transformedAgents);
-      })
-      .catch((err) => console.error('Failed to fetch agents:', err));
+    fetchPatients();
   }, []);
 
   const toggleFormVisibility = () => {
     setIsFormVisible((prev) => !prev);
   };
 
-  const updateAgent = (name: string, dateOfBirth: string, status: Agent['status']) => {
-    const newAgent = {
-      first_name: firstName,
-      middle_name: '',
-      last_name: lastName,
-      date_of_birth: dateOfBirth,
-      status,
-      provider_id: 'bd60654a-7217-4382-8f66-af08b5a3b477',
-    };
-
-    fetch('http://localhost:8000/api/patients/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(newAgent),
-    })
-      .then(res => res.json())
-      .then(createdAgent => {
-        setAgents(prev => [...prev, createdAgent]);
-      })
-      .catch(err => console.error('Error adding agent:', err));
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    navigate('/login');
   };
-
-  const handleEditClick = (patient: Agent) => {
-    if (editingId === patient.id) {
-      const payload = {
-        first_name: editedData.firstName,
-        middle_name: editedData.middleName || '',
-        last_name: editedData.lastName,
-        date_of_birth: editedData.dateOfBirth,
-        status: editedData.status,
-        provider_id: 'bd60654a-7217-4382-8f66-af08b5a3b477',
-      };
-  
-      fetch(`http://localhost:8000/api/patients/${patient.id}/`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      })
-        .then((res) => res.json())
-        .then((updated) => {
-          setAgents((prev) =>
-            prev.map((agent) =>
-              agent.id === updated.id
-                ? {
-                    ...agent,
-                    name: `${updated.first_name} ${updated.last_name}`,
-                    dateOfBirth: updated.date_of_birth,
-                    status: updated.status,
-                    lastSeen: new Date().toLocaleString(),
-                  }
-                : agent
-            )
-          );
-          setEditingId(null);
-          setEditedData({});
-        });
-    } else {
-      setEditingId(patient.id);
-      setEditedData({
-        firstName: patient.firstName || '',
-        lastName: patient.lastName || '',
-        dateOfBirth: patient.dateOfBirth || '',
-        status: patient.status || 'Active',
-        middleName: patient.middleName || '',
-      });
-    }
-  };
-  
-  
 
   const deleteAgent = (id: string) => {
     fetch(`http://localhost:8000/api/patients/${id}/`, { method: 'DELETE' })
@@ -156,7 +95,6 @@ const AgentList: React.FC = () => {
 
   return (
   <>
-    <Header userName="Roma" onLogout={() => console.log('Logged out')} />
     <div className="container">
     
 

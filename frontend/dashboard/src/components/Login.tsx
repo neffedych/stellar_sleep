@@ -27,6 +27,7 @@ const Login: React.FC = () => {
       const data = await res.json();
       if (res.ok) {
         localStorage.setItem('token', data.token);
+        localStorage.setItem('user', form.username);
         console.log('Login successful:', data);
         alert('Login successful!');
         navigate('/');
@@ -66,11 +67,11 @@ const Login: React.FC = () => {
                     onChange={handleChange}
                     className="form-input"
                 /><br />
-                <button type="submit" className="form-button">Login</button>
+                <button type="submit" disabled={!form.username || !form.password} className="form-button">Login</button>
 
                 <p>
                     Not a user?{' '}
-                    <button type="button" disabled={!form.username || !form.password} onClick={goToRegister} className="link-button">
+                    <button type="button"  onClick={goToRegister} className="link-button">
                     Register here
                     </button>
                 </p>

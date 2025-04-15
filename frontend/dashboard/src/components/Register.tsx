@@ -40,6 +40,7 @@ const goToLogin = () => {
       if (res.ok) {
         alert('Registration successful!');
         console.log('Registration successful');
+        navigate("/login")
       } else {
         alert('Error: ' + JSON.stringify(data));
         console.log('Error: ' + JSON.stringify(data));
@@ -51,9 +52,6 @@ const goToLogin = () => {
 
   return (
     <>
-        
-
-        
         <div className='register-container'>
             <form onSubmit={handleSubmit}>
             <img alt='stellar-sleep img' src='/stellar_sleep.jpeg'></img>
@@ -82,7 +80,7 @@ const goToLogin = () => {
                 className="form-input"
             /><br />
             <button type="submit" disabled={!form.username || !form.email || !form.password}
-                className="form-button" onClick={goToLogin}>Register</button>
+                className="form-button">Register</button>
         </form>
         </div>
     </>
