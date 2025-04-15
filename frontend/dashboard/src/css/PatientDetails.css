@@ -31,3 +31,8 @@
     transform: scale(1.03);
   }
 
+  .loading{
+    font-size: 1.2rem;
+    text-align: center;
+    margin-top: 10rem;
+  }

@@ -66,11 +66,6 @@ const AgentList: React.FC = () => {
     setIsFormVisible((prev) => !prev);
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    navigate('/login');
-  };
 
   const deleteAgent = (id: string) => {
     fetch(`http://localhost:8000/api/patients/${id}/`, { method: 'DELETE' })
@@ -146,6 +141,7 @@ const AgentList: React.FC = () => {
             editingAgentId={null}
             providerId={"bd60654a-7217-4382-8f66-af08b5a3b477"}
             toggleFormVisibility={toggleFormVisibility}
+            refreshPatientList={fetchPatients}
 
           />
         )}

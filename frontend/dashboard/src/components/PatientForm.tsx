@@ -15,6 +15,7 @@ interface PatientFormProps {
   editingAgentId: string | null;
   providerId: string;
   toggleFormVisibility: () => void; 
+  refreshPatientList: () => void;
 }
 
 const PatientForm: React.FC<PatientFormProps> = ({
@@ -30,6 +31,8 @@ const PatientForm: React.FC<PatientFormProps> = ({
   setDateOfBirthError,
   editingAgentId,
   toggleFormVisibility,
+  refreshPatientList
+  
 }) => {
   const providerId = "4417d7f4-9e0b-45e4-abaf-6f031c07e0ae"; 
   const [firstAddress, setFirstAddress] = useState("");
@@ -143,6 +146,7 @@ const PatientForm: React.FC<PatientFormProps> = ({
       setDateOfBirthError(false);
       setFirstAddress("");
 
+      refreshPatientList();
       toggleFormVisibility();
     } catch (error) {
       console.error("Error creating patient or address:", error);

@@ -21,14 +21,14 @@ const PatientDetails: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [address, setAddress] = useState<{ firstAddress: string; secondAddress: string } | null>(null);
   const [customFields, setCustomFields] = useState<{ fieldName: string; fieldValue: string }[]>([]);
-  const [isEditing, setIsEditing] = useState(false);  // To track edit mode
+  const [isEditing, setIsEditing] = useState(false);
 
   const [updatedPatient, setUpdatedPatient] = useState<Patient | null>(null);
 
   useEffect(() => {
     const fetchPatientDetails = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/api/patients/${id}`);
+        const response = await fetch(`http://localhost:8000/api/patients/${id}/`);
         if (!response.ok) throw new Error("Failed to fetch patient details");
 
         const data = await response.json();
@@ -49,7 +49,7 @@ const PatientDetails: React.FC = () => {
           }),
         };
         setPatient(patientData);
-        setUpdatedPatient(patientData);  // Set initial state for editing
+        setUpdatedPatient(patientData);
         
         const addressResponse = await fetch(`http://localhost:8000/api/addresses/`);
         if (!addressResponse.ok) throw new Error("Failed to fetch addresses");
@@ -68,7 +68,7 @@ const PatientDetails: React.FC = () => {
         if (!fieldsResponse.ok) throw new Error("Failed to fetch custom fields");
         const allFields = await fieldsResponse.json();
 
-        const patientFieldsResponse = await fetch(`http://localhost:8000/api/patient-custom-fields/?patient_id=${patientData.id}`);
+        const patientFieldsResponse = await fetch(`http://localhost:8000/api/patient-custom-fields/?patient_id=${patientData.id}/`);
         if (!patientFieldsResponse.ok) throw new Error("Failed to fetch patient custom fields");
 
         const patientFieldValues = await patientFieldsResponse.json();
@@ -101,7 +101,7 @@ const PatientDetails: React.FC = () => {
   const handleSaveClick = async () => {
     try {
       if (updatedPatient && updatedPatient.id) {
-        const response = await fetch(`http://localhost:8000/api/patients/${updatedPatient.id}`, {
+        const response = await fetch(`http://localhost:8000/api/patients/${updatedPatient.id}/`, {
           method: "PATCH",  
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(updatedPatient),
